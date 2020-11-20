@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace GetSplitNumber
@@ -13,7 +14,7 @@ namespace GetSplitNumber
             AlphaNumeric = alphaNumeric;
         }
         protected string AlphaNumeric { get; }
-        public string GetLastNumber()
+        public string GetLastNumberOnString()
         {
             string numberString = "";
             if (!string.IsNullOrWhiteSpace(AlphaNumeric))
@@ -41,6 +42,16 @@ namespace GetSplitNumber
                 collectionNumber.ForEach(x => numberString += x.ToString());
             }
             return numberString;
+        }
+
+        public string GetNumberOnCurrency()
+        {
+            string pattern = @"[^,.0-9]";
+            string substitution = @"";
+            RegexOptions options = RegexOptions.Multiline;
+            Regex regex = new Regex(pattern, options);
+            string result = regex.Replace(AlphaNumeric, substitution);
+            return result;
         }
     }
 }

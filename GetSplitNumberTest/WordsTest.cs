@@ -14,7 +14,7 @@ namespace GetSplitNumberTest
             string param = "item code1";
             var word = new Words(param);
             string expectedValue = "1";
-            Assert.AreEqual(expectedValue, word.GetLastNumber());
+            Assert.AreEqual(expectedValue, word.GetLastNumberOnString());
         }
 
         [TestMethod]
@@ -23,7 +23,7 @@ namespace GetSplitNumberTest
             string param = "item1 code1";
             var word = new Words(param);
             string expectedValue = "1";
-            Assert.AreEqual(expectedValue, word.GetLastNumber(), $"{word.GetLastNumber()} is not match with {expectedValue}");
+            Assert.AreEqual(expectedValue, word.GetLastNumberOnString(), $"{word.GetLastNumberOnString()} is not match with {expectedValue}");
         }
         
         [TestMethod]
@@ -32,7 +32,7 @@ namespace GetSplitNumberTest
             string param = "1item1 code1";
             var word = new Words(param);
             string expectedValue = "1";
-            Assert.AreEqual(expectedValue, word.GetLastNumber(), $"{word.GetLastNumber()} is not match with {expectedValue}");
+            Assert.AreEqual(expectedValue, word.GetLastNumberOnString(), $"{word.GetLastNumberOnString()} is not match with {expectedValue}");
         }
 
         [TestMethod]
@@ -41,7 +41,16 @@ namespace GetSplitNumberTest
             string param = "1item1 code112";
             var word = new Words(param);
             string expectedValue = "112";
-            Assert.AreEqual(expectedValue, word.GetLastNumber(), $"{word.GetLastNumber()} is not match with {expectedValue}");
+            Assert.AreEqual(expectedValue, word.GetLastNumberOnString(), $"{word.GetLastNumberOnString()} is not match with {expectedValue}");
+        }
+
+        [TestMethod]
+        public void NumberOnCurrency()
+        {
+            string param = "1,3508.50 USD";
+            var word = new Words(param);
+            string expectedValue = "1,3508.50";
+            Assert.AreEqual(expectedValue, word.GetNumberOnCurrency(), $"{word.GetNumberOnCurrency()} is not match with {expectedValue}");
         }
 
 
